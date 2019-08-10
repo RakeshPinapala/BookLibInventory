@@ -1,5 +1,6 @@
 package com.aryans.library.services.rest;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +49,9 @@ public class UserRestController {
 	}
 	
 	@PostMapping(path = "/validate", consumes = "application/json")
-	public String validateUserLogin(@RequestBody String json) throws JsonMappingException, JsonProcessingException {
+	public String validateUserLogin(@RequestBody String json) throws IOException, JsonMappingException, JsonProcessingException {
 		ObjectMapper objMap = new ObjectMapper();
-		JsonNode jsonNode = objMap.readTree(json);
+		JsonNode jsonNode = objMap.readTree(json); //might throw IOException
 		return Boolean.toString(ufc.validateLogin(jsonNode.get("UserName").asText(), jsonNode.get("Password").asText()));
 	}
 	
