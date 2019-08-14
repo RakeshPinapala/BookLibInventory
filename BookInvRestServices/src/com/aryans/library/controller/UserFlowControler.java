@@ -2,6 +2,7 @@ package com.aryans.library.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,6 +26,11 @@ public class UserFlowControler {
 	@Transactional
 	public boolean registerUser(List userServiceValues) {
 		return mUserModelDao.insertUser(mUserViewModelMapper.mapUserInsertion(userServiceValues));
+	}
+	
+	@Transactional
+	public boolean updateUser(Map<String, Object> values, String userName) {
+		return mUserModelDao.updateUserDetails(mUserViewModelMapper.mapUpdateUserDetails(values), userName);
 	}
 	
 	public boolean validateLogin(String uName, String passwd) {

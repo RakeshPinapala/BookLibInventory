@@ -1,7 +1,13 @@
 package com.aryans.library.model.Dao;
 
+import java.lang.reflect.Array;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -71,7 +77,21 @@ public class UserModelDao {
 	 * @return list of user model objects.
 	 */
 	public List<UserModel> getAllUsers() {
-		//System.out.println("Shinchan: " + mJdbcTemplate.queryForList(mUserDataBase.getAllUsers(), UserModel.class).size());
 		return mJdbcTemplate.query(mUserDataBase.getAllUsers(), new UserRowMapper());
+	}
+	
+	/**
+	 * Method to update the user details
+	 * 
+	 * @return
+	 */
+	public boolean updateUserDetails(Map<String, Object> valuesMap, String currentUserName) {
+		String sql = DaoUtility.PrepareUpdateQuery(mUserDataBase.getUpdateUserQuery(), valuesMap.keySet());
+		List list = new ArrayList();
+		valuesMap.values().forEach( (Object obj) -> list.add(obj));
+		list.add(currentUserName);
+		Object[] args = list.toArray();
+		
+		return mJdbcTemplate.update(sql, args) > 0 ? true : false;
 	}
 }

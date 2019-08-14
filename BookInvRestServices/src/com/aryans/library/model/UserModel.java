@@ -1,5 +1,8 @@
 package com.aryans.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = {"userId"})
 public class UserModel {
 	long userId;
 	String userType;
