@@ -86,7 +86,7 @@ public class UserModelDao {
 	 * @return
 	 */
 	public boolean updateUserDetails(Map<String, Object> valuesMap, String currentUserName) {
-		String sql = DaoUtility.PrepareUpdateQuery(mUserDataBase.getUpdateUserQuery(), valuesMap.keySet());
+		String sql = DaoUtility.PrepareUpdateQuery(mUserDataBase.getUpdateUserQuery(), valuesMap.keySet(), new UserModel());
 		List list = new ArrayList();
 		valuesMap.values().forEach( (Object obj) -> list.add(obj));
 		list.add(currentUserName);
