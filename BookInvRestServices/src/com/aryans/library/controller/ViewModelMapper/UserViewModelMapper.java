@@ -1,6 +1,7 @@
 package com.aryans.library.controller.ViewModelMapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.bcrypt.*;
@@ -20,4 +21,14 @@ public class UserViewModelMapper {
 		objValues[2]=BCrypt.hashpw((String) serviceValues.get(2), BCrypt.gensalt());
 		return objValues;
 	}
+	
+	public Map<String,Object> mapUpdateUserDetails(Map<String,Object> values) {
+		values.forEach((String key, Object value) -> {
+						if(key.equalsIgnoreCase("Password")) {
+							values.put(key, BCrypt.hashpw((String) values.get(key), BCrypt.gensalt()));
+						}
+		});
+		
+		return values;
+	} 
 }

@@ -3,7 +3,13 @@ package com.aryans.library.model.DataBase.Derby;
 import org.springframework.stereotype.Component;
 
 import com.aryans.library.model.DataBase.UserDataBase;
-
+/**
+ * 
+ * @author Shinchan
+ *
+ * TODO : Need to move all the column and table names to a constants file including the place holder.  
+ *Note: #p# is the place holder for the dynamic arguments. 
+ */
 @Component
 public class DerbyUserDataBase implements UserDataBase {
 
@@ -30,6 +36,11 @@ public class DerbyUserDataBase implements UserDataBase {
 	@Override
 	public String getAllUsers() {
 		return "Select * from USERS";
+	}
+	
+	@Override
+	public String getUpdateUserQuery() {
+		return "Update USERS set #p# where USER_NAME=?";
 	}
 	
 }

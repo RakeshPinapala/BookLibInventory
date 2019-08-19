@@ -6,4 +6,5 @@ public interface UserDataBase {
 	public String getUserByNameQuery();
 	public String getUserPassByName();
 	public String getAllUsers();
+	public String getUpdateUserQuery();
 }

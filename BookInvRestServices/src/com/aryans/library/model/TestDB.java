@@ -2,6 +2,8 @@ package com.aryans.library.model;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,7 +19,12 @@ public class TestDB {
 		
 		UserModelDao umDao = (UserModelDao) appContext.getBean("userModelDao");
 		//System.out.println(umDao.insertUser(new Object[] {"USER", "Sitama", "onePunchMan", null}));
-		System.out.println(umDao.getUserById(2L).getUserName());
+		//System.out.println(umDao.getUserById(2L).getUserName());
+		Map<String,Object> valuesMap = new HashMap<String,Object>();
+		valuesMap.put("USER_TYPE", "Admin");
+		valuesMap.put("USER_NAME", "Sitama gundu");
+		
+		System.out.println(umDao.updateUserDetails(valuesMap, "Sitama"));
 		
 		//BooksModelDao booksDao = (BooksModelDao) appContext.getBean("booksModelDao");
 		//System.out.println(booksDao.getBookByID(1L).getImages());
